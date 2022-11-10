@@ -1,6 +1,5 @@
 <template>
 	<CategotyList :categories="categories" />
-	<!-- <ThreadListPage :threads="threads" /> -->
 </template>
 
 <script>
@@ -9,6 +8,7 @@ import CategotyList from './CategotyList.vue'
 
 export default {
 	components: { CategotyList },
+
 	setup() {
 		let store = useStore()
 		let { categories } = store.getters.getData;

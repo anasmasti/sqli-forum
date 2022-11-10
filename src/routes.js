@@ -9,7 +9,6 @@ import CategoryShow from "./components/CategoryShow.vue";
 // Init routes
 const routes = [
   {
-    name: "",
     path: "/",
     component: HomePage
   },
