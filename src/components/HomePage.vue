@@ -1,20 +1,20 @@
 <template>
-	<ThreadListPage :threads="threads" />
+	<CategotyList :categories="categories" />
+	<!-- <ThreadListPage :threads="threads" /> -->
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue';
-import data from "../assets/data.json";
-import ThreadListPage from './ThreadListPage.vue'
+import { useStore } from 'vuex';
+import CategotyList from './CategotyList.vue'
 
 export default {
-	components: { ThreadListPage },
+	components: { CategotyList },
 	setup() {
-		let dataSource = reactive(data)
-		let { threads } = toRefs(dataSource)
+		let store = useStore()
+		let { categories } = store.getters.getData;
 
 		return {
-			threads
+			categories
 		}
 	}
 };

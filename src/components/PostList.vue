@@ -43,8 +43,7 @@ export default {
         },
         userById(userId) {
             return this.users.find((u) => u.id === userId);
-        },
-
+        }
     },
 };
 </script>

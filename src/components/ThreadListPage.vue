@@ -29,11 +29,9 @@
 </template>
 
 <script>
-import { reactive, toRefs } from 'vue';
-import data from "../assets/data.json";
+import { useStore } from 'vuex';
 
 export default {
-
     props: {
         threads: {
             type: Array,
@@ -41,12 +39,11 @@ export default {
         }
     },
     setup() {
-        let dataSource = reactive(data)
-
-        let { users } = toRefs(dataSource)
+        let store = useStore()
+        let { users } = store.getters.getData;
 
         let userById = (userId) => {
-            return users.value.find((u) => u.id === userId);
+            return users.find((u) => u.id === userId);
         }
 
         return {

@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import { computed, reactive, toRefs } from 'vue';
-import data from "../assets/data.json";
+import { computed } from 'vue';
 import PostList from "./PostList.vue";
 import PostEditor from './PostEditor.vue';
+import { useStore } from 'vuex';
 
 export default {
   components: {
@@ -21,26 +21,24 @@ export default {
   },
   props: {
     id: {
-      type: String,
-      required: true,
+      type: String
     },
   },
   setup(props) {
-    let dataSource = reactive(data)
-    let { threads, posts } = toRefs(dataSource)
+    let store = useStore()
+    let { threads, posts } = store.getters.getData;
 
     let thread = computed(() => {
-      return threads.value.find((thread) => thread.id === props.id);
+      return threads.find((thread) => thread.id === props.id);
 
     })
     let threadPosts = computed(() => {
-      return posts.value.filter((p) => p.threadId === props.id);
+      return posts.filter((p) => p.threadId === props.id);
     })
 
-    let savePost = ({ post, postId }) => {
+    let savePost = ({ post }) => {
       post.threadId = props.id
-      posts.value.push(post);
-      thread.value.posts.push(postId);
+      store.dispatch('addPost', post)
     }
 
     return {
