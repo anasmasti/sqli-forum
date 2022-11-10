@@ -9,7 +9,8 @@
                         </router-link>
                     </p>
                     <p class="text-faded text-xsmall">
-                        By <a href="">{{ userById(thread.userId).name }}</a>, {{ thread.publishedAt }}
+                        By <a href="">{{ userById(thread.userId).name }}</a>,
+                        <AppTimeStamps :timestamps='thread.publishedAt' />
                     </p>
                 </div>
                 <div class="activity">
@@ -19,7 +20,7 @@
                         <p class="text-xsmall">
                             By <a href="#">{{ userById(thread.userId).name }}</a>
                         </p>
-                        <div class="text-faded text-xsmall">{{ thread.publishedAt }}</div>
+                        <AppTimeStamps :timestamps='thread.publishedAt' />
                     </div>
                 </div>
             </div>
@@ -32,11 +33,12 @@ import { reactive, toRefs } from 'vue';
 import data from "../assets/data.json";
 
 export default {
+
     props: {
         threads: {
             type: Array,
-            required: true,
-        },
+            required: true
+        }
     },
     setup() {
         let dataSource = reactive(data)
