@@ -5,7 +5,7 @@ let NotFoundPage = () => import("../pages/NotFoundPage.vue");
 let ForumShowPage = () => import("../pages/ForumShowPage.vue");
 let CategoryShowPage = () => import("../pages/CategoryShowPage.vue");
 let ForumPage = () => import("../pages/CategoryShowPage.vue");
-let RegisterPage = () => import("../pages/RegisterPage.vue");
+let SignUpPage = () => import("../pages/SignUpPage.vue");
 let SignInPage = () => import("../pages/SignInPage.vue");
 let ProfilePage = () => import("../pages/ProfilePage.vue");
 
@@ -16,8 +16,8 @@ const routes = [
     component: HomePage,
   },
   {
-    path: "/register",
-    component: RegisterPage,
+    path: "/sign-up",
+    component: SignUpPage,
   },
   {
     path: "/sign-in",

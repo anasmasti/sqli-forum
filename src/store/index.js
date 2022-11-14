@@ -6,10 +6,17 @@ const store = createStore({
   state() {
     return {
       dataSource: data,
-      authId: "ALXhxjwgY9PinwNGHpfai6OWyDu2",
+      isLoggedIn: false,
+      authUser: {},
     };
   },
   actions: {
+    toggleLoggedIn(context, { isLoggedIn }) {
+      context.commit("setLoggedIn", { isLoggedIn });
+    },
+    addAuthUser(context, { user }) {
+      context.commit("setAuthUser", { user });
+    },
     addPost(context, post) {
       const postId = "dhdhd" + Math.random();
       context.commit("setPost", { post });
@@ -20,6 +27,12 @@ const store = createStore({
     },
   },
   mutations: {
+    setLoggedIn(state, { isLoggedIn }) {
+      state.isLoggedIn = isLoggedIn;
+    },
+    setAuthUser(state, { user }) {
+      state.authUser = user;
+    },
     setPost(state, { post }) {
       state.dataSource.posts.push(post);
     },
@@ -35,20 +48,10 @@ const store = createStore({
       return state.dataSource;
     },
     authUser(state) {
-      const user = state.dataSource.users.find((u) => u.id === state.authId);
-      if (!user) {
-        return {};
-      } else {
-        return {
-          ...user,
-          get posts() {
-            return state.dataSource.posts.find((p) => p.userId === user.id);
-          },
-          get threads() {
-            return state.dataSource.threads.find((th) => th.userId === user.id);
-          },
-        };
-      }
+      return state.authUser
+    },
+    isLoggedIn(state) {
+      return state.isLoggedIn
     },
   },
 });

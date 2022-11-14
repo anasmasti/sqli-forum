@@ -1,8 +1,8 @@
 <template>
-	<h1>Login to Your Account</h1>
+	<h1>Create an Account</h1>
 	<p><input type="text" placeholder="Email" v-model="email" /></p>
 	<p><input type="password" placeholder="Password" v-model="password" /></p>
-	<p><button @click="signIn">Submit</button></p>
+	<p><button @click="signUp">Submit</button></p>
 </template>
   
 <script>
@@ -16,40 +16,25 @@ export default {
 	setup() {
 		const email = ref('')
 		const password = ref('')
-		const errMsg = ref('')
 		const router = useRouter()
 		const store = useStore()
 
-		const signIn = () => {
-			firebase.auth().signInWithEmailAndPassword(email.value, password.value).then(({ user }) => {
+		const signUp = () => {
+			firebase.auth().createUserWithEmailAndPassword(email.value, password.value).then(({ user }) => {
 				document.cookie = `isLoggedIn= ${true}`
-				document.cookie = `user= ${JSON.stringify(user._delegate)}` 
+				document.cookie = `user= ${JSON.stringify(user._delegate)}}` 
 				store.dispatch('toggleLoggedIn', { isLoggedIn: true })
 				store.dispatch('addAuthUser', { user: user._delegate })
 				router.push('/')
 			}).catch(error => {
-				switch (error.code) {
-					case 'auth/invalid-email':
-						errMsg.value = 'Invalid email'
-						break
-					case 'auth/user-not-found':
-						errMsg.value = 'No account with that email was found'
-						break
-					case 'auth/wrong-password':
-						errMsg.value = 'Incorrect password'
-						break
-					default:
-						errMsg.value = 'Email or password was incorrect'
-						break
-				}
+				console.log(error.code)
+				alert(error.message);
 			});
 		}
-
 		return {
-			signIn,
 			email,
 			password,
-			errMsg
+			signUp
 		}
 	}
 }
