@@ -1,11 +1,11 @@
-import router from "./routes";
+import router from "./router";
 import { createApp } from "vue";
 import App from "./App.vue";
 import store from "./store";
 
 let app = createApp(App);
 
-const files = require.context("./shared", true, /\.vue$/i);
+const files = require.context("./components/shared", true, /\.vue$/i);
 
 files.keys().map((key) => {
   app.component(

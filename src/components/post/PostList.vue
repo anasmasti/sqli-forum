@@ -21,7 +21,7 @@
 </template>
   
 <script>
-import dataSource from "../assets/data.json";
+import dataSource from "../../assets/data.json";
 
 export default {
     props: {

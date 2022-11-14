@@ -12,18 +12,18 @@
 
     </div>
     <div>
-      <ThreadListPage :threads="threadsList" />
+      <ThreadList :threads="threadsList" />
     </div>
   </div>
 </template>
 
 <script>
-import ThreadListPage from './ThreadListPage.vue'
+import ThreadList from '@/components/thread/ThreadList.vue'
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 export default {
-  components: { ThreadListPage },
+  components: { ThreadList },
   setup(props) {
     let store = useStore()
     let { forums, threads } = store.getters.getData;

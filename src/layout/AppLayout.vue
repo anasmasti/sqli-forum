@@ -11,11 +11,13 @@
         <nav class="navbar">
             <ul>
                 <li class="navbar-user">
-                    <a href="#" target="_blank">
+                    <router-link :to="{
+                        name: 'profile'
+                    }">
                         <img src="../assets/logo.png" alt="avatar" class="avatar-small" />
-                        <span>Anas Masti
+                        <span>{{ user.name }}
                             <img src="../assets/logo.png" alt="arrow" class="icon-profile" /></span>
-                    </a>
+                    </router-link>
                     <div id="user-dropdown">
                         <div class="triangle-drop">
                             <ul class="dropdown-menu">
@@ -34,7 +36,17 @@
 </template>
   
 <script>
-export default {};
+import { useStore } from 'vuex';
+export default {
+    setup() {
+        let store = useStore();
+        let user = store.getters.authUser;
+
+        return {
+            user
+        }
+    }
+};
 </script>
   
 <style lang="scss" scoped>

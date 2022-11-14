@@ -10,8 +10,8 @@
 
 <script>
 import { computed } from 'vue';
-import PostList from "./PostList.vue";
-import PostEditor from './PostEditor.vue';
+import PostList from "@/components/post/PostList.vue";
+import PostEditor from '@/components/post/PostEditor.vue';
 import { useStore } from 'vuex';
 
 export default {

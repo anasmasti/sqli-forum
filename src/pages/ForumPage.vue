@@ -4,7 +4,7 @@
 
 <script>
 import { useStore } from 'vuex';
-import ForumList from '../components/ForumList.vue'
+import ForumList from '@/components/forum/ForumList.vue'
 
 export default {
     components: { ForumList },

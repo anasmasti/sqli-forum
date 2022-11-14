@@ -4,7 +4,7 @@
 
 <script>
 import { useStore } from 'vuex';
-import CategotyList from './CategotyList.vue'
+import CategotyList from '@/components/category/CategotyList.vue'
 
 export default {
 	components: { CategotyList },

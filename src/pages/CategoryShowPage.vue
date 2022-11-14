@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import ForumList from './ForumList.vue'
+import ForumList from '@/components/forum/ForumList.vue'
 import { useStore } from 'vuex'
 
 export default {
