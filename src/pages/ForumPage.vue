@@ -10,7 +10,7 @@ export default {
     components: { ForumList },
     setup() {
         let store = useStore()
-        let { forums } = store.getters.getData;
+        let  forums  = store.getters.getForums;
 
         return {
             forums

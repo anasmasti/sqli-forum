@@ -27,7 +27,6 @@ export default {
 				store.dispatch('addAuthUser', { user: user._delegate })
 				router.push('/')
 			}).catch(error => {
-				console.log(error.code)
 				alert(error.message);
 			});
 		}

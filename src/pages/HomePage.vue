@@ -11,7 +11,7 @@ export default {
 
 	setup() {
 		let store = useStore()
-		let { categories } = store.getters.getData;
+		let categories = store.getters.getCategories;
 
 		return {
 			categories

@@ -1,10 +1,9 @@
 <template>
-    <ForumList v-for="category in categories" :key="category.id" :forums="getForumsForCategory(category)"
-        :title="category.name" :categoryId="category.id"/>
+    <ForumList v-for="category in categories" :key="category.uid" :title="category.name" :categoryId="category.uid" :forums="forums"  />
 </template>
 
 <script>
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 import ForumList from "../forum/ForumList.vue";
 
 export default {
@@ -15,17 +14,12 @@ export default {
             required: true
         }
     },
-
     setup() {
         let store = useStore()
-        let { forums } = store.getters.getData
-
-        let getForumsForCategory = (category) => {
-            return forums.filter((forum) => forum.categoryId === category.id)
-        }
+        let forums = store.getters.getForums
 
         return {
-            getForumsForCategory
+            forums
         }
     }
 }

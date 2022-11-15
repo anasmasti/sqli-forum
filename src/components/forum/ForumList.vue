@@ -9,12 +9,13 @@
                     }
                 }">{{ title }}</router-link>
             </h2>
-            <div class="forum-listing" v-for="forum in forums" :key="forum.id">
+            <!-- <template v-if="forums"> -->
+            <div class="forum-listing" v-for="forum in forums" :key="forum.uid">
                 <div class="forum-details">
                     <router-link :to="{
                         name: 'forumShow',
                         params: {
-                            id: forum.id
+                            id: forum.uid
                         }
                     }" v-text="forum.name">
                     </router-link>
@@ -26,6 +27,8 @@
                     </p>
                 </div>
             </div>
+
+            <!-- </template> -->
         </div>
     </div>
 </template>
@@ -33,10 +36,6 @@
 <script>
 export default {
     props: {
-        forums: {
-            type: Array,
-            required: true
-        },
         categoryId: {
             type: String,
             required: false
@@ -44,7 +43,10 @@ export default {
         title: {
             type: String,
             default: "Forums"
-        }
+        },
+        forums: {
+            type: Array
+        }  
     }
 }
 </script>

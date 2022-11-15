@@ -20,7 +20,7 @@ export default {
         let { forums, categories } = store.getters.getData
 
         let category = () => {
-            return categories.find((c) => c.id === props.id)
+            return categories.find((c) => c.uid === props.id)
         }
 
         let getForumsForCategory = () => {

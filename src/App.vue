@@ -22,6 +22,9 @@ export default {
         getCookie('user') && store.dispatch('addAuthUser', { user: JSON.parse(getCookie('user')) })
         if(getCookie('isLoggedIn')) store.dispatch('toggleLoggedIn', { isLoggedIn: getCookie('isLoggedIn') })
       }
+
+      store.dispatch('fetchCategories')
+			store.dispatch('fetchForums') 
     })
   }
 }

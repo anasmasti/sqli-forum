@@ -4,10 +4,10 @@ let ThreadShowPage = () => import("../pages/ThreadShowPage.vue");
 let NotFoundPage = () => import("../pages/NotFoundPage.vue");
 let ForumShowPage = () => import("../pages/ForumShowPage.vue");
 let CategoryShowPage = () => import("../pages/CategoryShowPage.vue");
-let ForumPage = () => import("../pages/CategoryShowPage.vue");
 let SignUpPage = () => import("../pages/SignUpPage.vue");
 let SignInPage = () => import("../pages/SignInPage.vue");
 let ProfilePage = () => import("../pages/ProfilePage.vue");
+
 
 // Init routes
 const routes = [
@@ -22,11 +22,6 @@ const routes = [
   {
     path: "/sign-in",
     component: SignInPage,
-  },
-  {
-    name: "",
-    path: "/forums",
-    component: ForumPage,
   },
   {
     name: "profile",

@@ -1,6 +1,6 @@
 <template>
     <div class="post-list">
-        <div v-for="post in posts" :key="post.id" class="post">
+        <div v-for="post in posts" :key="post.uid" class="post">
             <div class="user-info">
                 <a href="#" class="user-name">{{ userById(post.userId).name }}</a>
                 <a href="#">
@@ -39,10 +39,10 @@ export default {
     },
     methods: {
         postbyId(postId) {
-            return this.posts.find((p) => p.id === postId);
+            return this.posts.find((p) => p.uid === postId);
         },
         userById(userId) {
-            return this.users.find((u) => u.id === userId);
+            return this.users.find((u) => u.uid === userId);
         }
     },
 };

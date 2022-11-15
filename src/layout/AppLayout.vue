@@ -52,7 +52,6 @@ export default {
 
         store.watch((_, getters) => {
             Object.assign(user, getters.authUser)
-            console.log(user);
             isLoggedIn.value = getters.isLoggedIn
         })
 
