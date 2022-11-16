@@ -1,6 +1,5 @@
 <template>
-    <div class="col-full">
-        <div class="forum-list">
+        <div class="bg-red-500">
             <h2 class="list-title">
                 <router-link :to="{
                     name: 'forumShow',
@@ -9,7 +8,6 @@
                     }
                 }">{{ title }}</router-link>
             </h2>
-            <!-- <template v-if="forums"> -->
             <div class="forum-listing" v-for="forum in forums" :key="forum.uid">
                 <div class="forum-details">
                     <router-link :to="{
@@ -28,9 +26,8 @@
                 </div>
             </div>
 
-            <!-- </template> -->
         </div>
-    </div>
+
 </template>
 
 <script>
