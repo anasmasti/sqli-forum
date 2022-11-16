@@ -37,7 +37,6 @@ export default {
     let threadTitle = ref('')
     let threadsByForum = reactive([])
 
-
     store.watch((_, getters) => {
       Object.assign(forum, getters.getForumById(props.id))
     })
@@ -47,19 +46,19 @@ export default {
       let threadsRef = firebase.firestore().collection("/threads");
 
       let thread = {
-        "forumId": forum.uid,
-        "lastPostAt": Math.floor(new Date().getTime() / 1000),
-        "posts": [],
-        "publishedAt": Math.floor(new Date().getTime() / 1000),
-        "title": threadTitle.value,
-        "userId": user.uid
+        forumId: forum.uid,
+        lastPostAt: Math.floor(new Date().getTime() / 1000),
+        posts: [],
+        publishedAt: Math.floor(new Date().getTime() / 1000),
+        title: threadTitle.value,
+        userId: user.uid,
       }
+
       threadsRef.add(thread).then((sendedThread) => {
         forumsRef.doc(forum.uid).update({
           threads: [sendedThread.uid]
         })
       })
-      console.log(thread);
     }
 
     onMounted(async () => {

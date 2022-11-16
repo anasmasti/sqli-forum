@@ -1,8 +1,8 @@
 <template>
   <div class="col-large push-top" v-if="thread">
     <h1>{{ thread.title }}</h1>
-    <!-- <PostList :posts="threadPosts" />
-    <PostEditor @save-post="savePost" /> -->
+    <PostList :posts="threadPosts" />
+    <PostEditor @save-post="savePost" />
   </div>
 
   <div v-else class="col-full text-center">There's No Thread</div>
@@ -10,24 +10,24 @@
 
 <script>
 import { onMounted, reactive } from 'vue';
-// import PostList from "@/components/post/PostList.vue";
-// import PostEditor from '@/components/post/PostEditor.vue';
-// import { useStore } from 'vuex';
+import { useStore } from 'vuex';
+import PostList from "@/components/post/PostList.vue";
+import PostEditor from '@/components/post/PostEditor.vue';
 import firebase from "firebase/compat/app";
 
 export default {
-  // components: {
-  //   PostList,
-  //   PostEditor,
-  // },
+  components: {
+    PostList,
+    PostEditor,
+  },
   props: {
     id: {
       type: String
     },
   },
   setup(props) {
-    // let store = useStore()
-
+    let store = useStore()
+    let threadPosts = store.getters.getPosts
     let thread = reactive({})
 
 
@@ -40,13 +40,15 @@ export default {
       })
     })
 
-    // let savePost = ({ post }) => {
-    //   post.threadId = props.id
-    //   store.dispatch('addPost', post)
-    // }
+    let savePost = ({ post }) => {
+      post.threadId = props.id
+      store.dispatch('addPost', post)
+    }
 
     return {
       thread,
+      savePost,
+      threadPosts
     };
   }
 };

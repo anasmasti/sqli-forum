@@ -2,7 +2,7 @@
     <div class="col-full">
         <form @submit.prevent="addPost">
             <div class="form-group">
-                <textarea v-model="newPost" name="" id="" rows="10" class="form-input"></textarea>
+                <textarea v-model="newPost" rows="10" class="form-input"></textarea>
             </div>
             <div class="form-actions">
                 <button class="btn-blue">Submit Post</button>
@@ -13,19 +13,20 @@
 
 <script>
 import { ref } from '@vue/reactivity';
+import { useStore } from 'vuex';
 export default {
     setup(_, context) {
+        let store = useStore()
         let newPost = ref("")
+        let user = store.getters.authUser;
 
         let addPost = () => {
-            const postId = "dhdhd" + Math.random();
             const post = {
-                id: postId,
                 publishedAt: Math.floor(Date.now() / 1000),
                 text: newPost.value,
-                userId: "ALXhxjwgY9PinwNGHpfai6OWyDu2",
+                userId: user.uid,
             };
-            context.emit("save-post", { post, postId })
+            context.emit("save-post", { post })
             newPost.value = "";
         }
 

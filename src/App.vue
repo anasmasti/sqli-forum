@@ -25,6 +25,7 @@ export default {
 
       store.dispatch('fetchCategories')
 			store.dispatch('fetchForums') 
+			store.dispatch('fetchPosts') 
     })
   }
 }
