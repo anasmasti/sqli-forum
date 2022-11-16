@@ -35,7 +35,6 @@ export default {
       let threadsRef = firebase.firestore().collection("/threads");
 
       threadsRef.doc(props.id).get().then((snapshot) => {
-        console.log(snapshot.data());
         Object.assign(thread, snapshot.data())
       })
     })

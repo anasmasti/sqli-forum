@@ -16,16 +16,22 @@ export default {
 
   setup() {
     const store = useStore()
+    let storeActions = [
+      'fetchCategories',
+      'fetchForums',
+      'fetchPosts',
+      'fetchUsers'
+    ]
 
     onMounted(() => {
-      if(document.cookie) {
+      if (document.cookie) {
         getCookie('user') && store.dispatch('addAuthUser', { user: JSON.parse(getCookie('user')) })
-        if(getCookie('isLoggedIn')) store.dispatch('toggleLoggedIn', { isLoggedIn: getCookie('isLoggedIn') })
+        if (getCookie('isLoggedIn')) store.dispatch('toggleLoggedIn', { isLoggedIn: getCookie('isLoggedIn') })
       }
 
-      store.dispatch('fetchCategories')
-			store.dispatch('fetchForums') 
-			store.dispatch('fetchPosts') 
+      storeActions.forEach(action => {
+        store.dispatch(action)
+      })
     })
   }
 }

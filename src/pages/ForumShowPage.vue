@@ -70,11 +70,10 @@ export default {
             uid: doc.id,
             ...doc.data(),
           });
-          });
-          console.log(threadsByForum);
         });
-    
-      })
+      });
+
+    })
 
     return {
       forum,

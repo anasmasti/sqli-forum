@@ -12,6 +12,7 @@ const store = createStore({
         forums: [],
         threads: [],
         posts: [],
+        users: [],
       },
       isLoggedIn: false,
       authUser: {},

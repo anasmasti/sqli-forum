@@ -23,4 +23,9 @@ export default {
   fetchPostsSuccess(state, posts) {
     state.dataSource.posts.push(...posts);
   },
+
+  // On fetch users from firebase done successfully
+  fetchUsersSuccess(state, users) {
+    state.dataSource.users.push(...users);
+  },
 };

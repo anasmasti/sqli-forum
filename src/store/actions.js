@@ -50,6 +50,22 @@ export default {
     });
   },
 
+  // Fetch Users from firebase
+  async fetchUsers(context) {
+    let usersRef = firebase.firestore().collection("/users");
+    let users = [];
+
+    await usersRef.onSnapshot((snapshot) => {
+        snapshot.forEach((doc) => {
+            users.push({
+              uid: doc.id,
+              ...doc.data(),
+            });
+          });
+      context.commit("fetchUsersSuccess", users);
+    });
+  },
+
   // Toggle logged in user
   toggleLoggedIn(context, { isLoggedIn }) {
     context.commit("setLoggedIn", { isLoggedIn });
