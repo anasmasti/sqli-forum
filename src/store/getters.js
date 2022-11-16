@@ -9,9 +9,10 @@ export default {
     return state.dataSource.forums;
   },
   getForumsByCategory: (state) => (categoryId) => {
-    return state.dataSource.forums.filter(
-      (forum) => forum.categoryId === categoryId
-    );
+    let forumsByCtagory = state.dataSource.forums.filter((forum) => {
+      return forum.categoryId == categoryId;
+    });
+    return forumsByCtagory;
   },
   getForumById: (state) => (id) => {
     return state.dataSource.forums.find((forum) => forum.uid === id);

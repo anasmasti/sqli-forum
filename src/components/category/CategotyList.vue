@@ -1,5 +1,6 @@
 <template>
-    <ForumList v-for="category in categories" :key="category.uid" :title="category.name" :categoryId="category.uid" :forums="forums"  />
+    <ForumList v-for="category in categories" :key="category.uid" :title="category.name" :categoryId="category.uid"
+        :forums="forums(category.uid)" />
 </template>
 
 <script>
@@ -16,7 +17,7 @@ export default {
     },
     setup() {
         let store = useStore()
-        let forums = store.getters.getForums
+        let forums = store.getters.getForumsByCategory
 
         return {
             forums

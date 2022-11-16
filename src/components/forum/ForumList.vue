@@ -46,7 +46,7 @@ export default {
         },
         forums: {
             type: Array
-        }  
+        }
     }
 }
 </script>
