@@ -1,5 +1,5 @@
 <template>
-    <div class="post-date text-faded0" :title="exactDate(timestamps)">
+    <div class="text-xs text-gray-500" :title="exactDate(timestamps)">
         {{ diffDate(timestamps) }}
     </div>
 </template>

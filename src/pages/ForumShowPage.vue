@@ -1,21 +1,17 @@
 <template>
-  <div class="col-full">
+  <section class="p-8">
     <div>
-      <div>
-        <h1 v-text="forum.name"></h1>
-        <p v-text="forum.description"></p>
-      </div>
-
-      <form @submit.prevent="postThtread">
-        <input type="text" v-model="threadTitle">
-        <button type="submit">New Thread</button>
-      </form>
-
+      <h1 v-text="forum.name" class="text-3xl font-black"></h1>
+      <p v-text="forum.description" class="text-xl"></p>
     </div>
-    <div>
-      <ThreadList :threads="threadsByForum" />
-    </div>
-  </div>
+
+    <form @submit.prevent="postThtread" class="flex gap-2 my-5">
+      <input type="text" class="border border-gray-500 bg-gray-50 p-1 rounded-lg" v-model="threadTitle">
+      <AppButton text="Add Post" />
+    </form>
+
+    <ThreadList :threads="threadsByForum" />
+  </section>
 </template>
 
 <script>

@@ -1,12 +1,8 @@
 <template>
-    <div class="col-full">
+    <div class="my-5">
         <form @submit.prevent="addPost">
-            <div class="form-group">
-                <textarea v-model="newPost" rows="10" class="form-input"></textarea>
-            </div>
-            <div class="form-actions">
-                <button class="btn-blue">Add Post</button>
-            </div>
+            <textarea class="bg-gray-50 w-full border border-gray-300 p-2 rounded-lg" placeholder="Add new post" v-model="newPost" rows="10"></textarea>
+            <AppButton text="Add Post" />
         </form>
     </div>
 </template>

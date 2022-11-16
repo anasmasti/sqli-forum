@@ -1,6 +1,5 @@
 <template>
-    {{ category().name }}
-    <ForumList :title="category().name" :forums="getForumsForCategory()" />
+    <ForumList :title="category.name" :forums="forumsByCategory(category.uid)" :categoryId="category.uid" />
 </template>
 
 <script>
@@ -17,19 +16,12 @@ export default {
 
     setup(props) {
         let store = useStore()
-        let { forums, categories } = store.getters.getData
-
-        let category = () => {
-            return categories.find((c) => c.uid === props.id)
-        }
-
-        let getForumsForCategory = () => {
-            return forums.filter((forum) => forum.categoryId === props.id)
-        }
+        let category = store.getters.getCategoryById(props.id)
+        let forumsByCategory = store.getters.getForumsByCategory
 
         return {
             category,
-            getForumsForCategory
+            forumsByCategory
         }
     }
 }

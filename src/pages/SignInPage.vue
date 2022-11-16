@@ -1,8 +1,14 @@
 <template>
-	<h1>Login to Your Account</h1>
-	<p><input type="text" placeholder="Email" v-model="email" /></p>
-	<p><input type="password" placeholder="Password" v-model="password" /></p>
-	<p><button @click="signIn">Submit</button></p>
+	<div class="h-full flex flex-col items-center justify-center p-9">
+		<h1 class="text-3xl font-black">Login to Your Account</h1>
+		<form @submit.prevent="signIn" class="flex flex-col p-5 gap-2">
+			<input class="p-2 bg-gray-50 rounded-lg border border-gray-200" type="text" placeholder="Email"
+				v-model="email" />
+			<input class="p-2 bg-gray-50 rounded-lg border border-gray-200" type="password" placeholder="Password"
+				v-model="password" />
+			<AppButton text="Login" />
+		</form>
+	</div>
 </template>
   
 <script>

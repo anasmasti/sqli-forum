@@ -1,28 +1,23 @@
 <template>
-        <div class="bg-red-500">
-            <h2 class="list-title">
+        <div class="p-8" >
+            <h2 class="text-3xl font-black">
                 <router-link :to="{
-                    name: 'forumShow',
+                    name: 'Category',
                     params: {
                         id: categoryId
                     }
                 }">{{ title }}</router-link>
             </h2>
-            <div class="forum-listing" v-for="forum in forums" :key="forum.uid">
-                <div class="forum-details">
+            <div v-for="forum in forums" :key="forum.uid">
+                <div class="bg-gray-50 rounded-lg p-5 mt-2">
                     <router-link :to="{
                         name: 'forumShow',
                         params: {
                             id: forum.uid
                         }
-                    }" v-text="forum.name">
+                    }" v-text="forum.name" class="text-xl font-bold hover:text-blue-500">
                     </router-link>
-                    <p v-text="forum.description"></p>
-                </div>
-                <div class="threads-count">
-                    <p class="count">
-                        <span v-text="forum.threads?.length"></span>
-                    </p>
+                    <p class="text-sm" v-text="forum.description"></p>
                 </div>
             </div>
 

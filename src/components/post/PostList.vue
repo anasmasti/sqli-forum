@@ -1,20 +1,16 @@
 <template>
-    <div class="post-list">
-        <div v-for="post in posts" :key="post.uid" class="post">
-            <div class="user-info">
-                <a href="#" class="user-name">{{ userById(post.userId)?.name }}</a>
-                <a href="#">
-                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="avatar-large" alt="user avatar" />
-                </a>
-            </div>
-            <div class="post-content">
-                <div>
-                    <p>
-                        {{ post.text }}
-                    </p>
-                </div>
-                <AppTimeStamps :timestamps="post.publishedAt" />
-            </div>
+    <div v-for="post in posts" :key="post.uid" class="bg-gray-50 mt-2 p-4 rounded-xl flex justify-between">
+        <div class="post-content">
+            <p v-text="post.text" class="capitalize text-lg font-black"></p>
+            <AppTimeStamps :timestamps="post.publishedAt" />
+        </div>
+        <div class="flex flex-col-reverse">
+            <span class="text-sm">
+                {{ userById(thread.userId)?.name ? userById(thread.userId)?.name : '--' }}
+            </span>
+            <a href="#">
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="w-7" alt="user avatar" />
+            </a>
         </div>
     </div>
 </template>

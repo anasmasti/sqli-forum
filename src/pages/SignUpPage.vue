@@ -1,9 +1,16 @@
 <template>
-	<h1>Create an Account</h1>
-	<p><input type="text" placeholder="Name" v-model="name" /></p>
-	<p><input type="text" placeholder="Email" v-model="email" /></p>
-	<p><input type="password" placeholder="Password" v-model="password" /></p>
-	<p><button @click="signUp">Create</button></p>
+	<div class="h-full flex flex-col items-center justify-center p-9">
+		<h1 class="text-3xl font-black">Create an Account</h1>
+		<form @submit.prevent="signUp" class="flex flex-col p-5 gap-2">
+			<input class="p-2 bg-gray-50 rounded-lg border border-gray-200" type="text" placeholder="Name"
+				v-model="name" />
+			<input class="p-2 bg-gray-50 rounded-lg border border-gray-200" type="text" placeholder="Email"
+				v-model="email" />
+			<input class="p-2 bg-gray-50 rounded-lg border border-gray-200" type="password" placeholder="Password"
+				v-model="password" />
+			<AppButton text="Create" />
+		</form>
+	</div>
 </template>
   
 <script>

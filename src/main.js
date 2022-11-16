@@ -4,9 +4,18 @@ import App from "@/App.vue";
 import store from "@/store";
 import firebase from "firebase/compat/app";
 import firebaseConfig from "@/config/firebaseConfig";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // Initialize APP
 let app = createApp(App);
+
+// Initialize fontawesome
+library.add(faSignOut);
+
+// Globally register the font-awesome-icon component
+app.component("font-awesome-icon", FontAwesomeIcon)
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

@@ -29,6 +29,9 @@ export default {
   getForumById: (state) => (id) => {
     return state.dataSource.forums.find((forum) => forum.uid === id);
   },
+  getCategoryById: (state) => (id) => {
+    return state.dataSource.categories.find((category) => category.uid === id);
+  },
   getUserById: (state) => (userId) => {
     return state.dataSource.users.find((user) => user.uid === userId);
   },
