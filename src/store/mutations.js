@@ -24,6 +24,11 @@ export default {
     state.dataSource.posts.push(...posts);
   },
 
+  // On fetch posts from firebase done successfully
+  fetchThreadsSuccess(state, threads) {
+    state.dataSource.threads.push(...threads);
+  },
+
   // On fetch users from firebase done successfully
   fetchUsersSuccess(state, users) {
     state.dataSource.users.push(...users);

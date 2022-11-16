@@ -1,13 +1,12 @@
 <template>
     <div class="post-list">
         <div v-for="post in posts" :key="post.uid" class="post">
-            <!-- <div class="user-info">
-                <a href="#" class="user-name">{{ userById(post.userId).name }}</a>
+            <div class="user-info">
+                <a href="#" class="user-name">{{ userById(post.userId)?.name }}</a>
                 <a href="#">
-                    <img :src="userById(post.userId).avatar" class="avatar-large" alt="user avatar" />
-                    <p class="desktop-only text-small">100 posts</p>
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="avatar-large" alt="user avatar" />
                 </a>
-            </div> -->
+            </div>
             <div class="post-content">
                 <div>
                     <p>
@@ -21,6 +20,7 @@
 </template>
   
 <script>
+import { useStore } from 'vuex';
 export default {
     props: {
         posts: {
@@ -28,6 +28,14 @@ export default {
             required: true,
         },
     },
+    setup() {
+        let store = useStore()
+        let userById = store.getters.getUserById
+
+        return {
+            userById
+        }
+    }
 };
 </script>
   

@@ -8,28 +8,27 @@
                         <router-link :to="{ name: 'threadShow', params: { id: thread.uid } }">{{ thread.title }}
                         </router-link>
                     </p>
-                    <!-- <p class="text-faded text-xsmall">
-                        By <a href="">{{ userById(thread.userId).name }}</a>,
+                    <p class="text-faded text-xsmall">
+                        By <a href="">{{ userById(thread.userId)?.name }}</a>,
                         <AppTimeStamps :timestamps='thread.publishedAt' />
-                    </p> -->
+                    </p>
                 </div>
-                <!-- <div class="activity">
-                    <p class="replies-count">{{ thread.posts.length }} replies</p>
-                    <img :src="userById(thread.userId).avatar" alt="user avatar" class="avatar-medium" />
+                <div class="activity">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user avatar" class="avatar-medium" />
                     <div>
                         <p class="text-xsmall">
-                            By <a href="#">{{ userById(thread.userId).name }}</a>
+                            By <a href="#">{{ userById(thread.userId)?.name }}</a>
                         </p>
                         <AppTimeStamps :timestamps='thread.publishedAt' />
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-// import { useStore } from 'vuex';
+import { useStore } from 'vuex';
 
 export default {
     props: {
@@ -39,10 +38,11 @@ export default {
         }
     },
     setup() {
-        
+        let store = useStore()
+        let userById = store.getters.getUserById
 
         return {
-           
+            userById
         }
     }
 };

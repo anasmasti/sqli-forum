@@ -14,6 +14,7 @@ import { useStore } from 'vuex';
 import PostList from "@/components/post/PostList.vue";
 import PostEditor from '@/components/post/PostEditor.vue';
 import firebase from "firebase/compat/app";
+import router from '@/router';
 
 export default {
   components: {
@@ -27,7 +28,7 @@ export default {
   },
   setup(props) {
     let store = useStore()
-    let threadPosts = store.getters.getPosts
+    let threadPosts = store.getters.getPostsByThread(props.id)
     let thread = reactive({})
 
 
@@ -42,6 +43,7 @@ export default {
     let savePost = ({ post }) => {
       post.threadId = props.id
       store.dispatch('addPost', post)
+      router.push('/')
     }
 
     return {

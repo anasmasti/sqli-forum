@@ -2,7 +2,7 @@
     <div class="col-3 push-top">
         <div class="profile-card">
             <p class="text-center">
-                <img :src="user.avatar" alt="Profile">
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile">
             </p>
         </div>
         <h1 class="title" v-text="user.username"></h1>

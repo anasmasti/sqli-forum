@@ -19,11 +19,10 @@
 </template>
 
 <script>
-import { reactive, ref } from '@vue/reactivity';
+import { ref } from '@vue/reactivity';
 import ThreadList from '@/components/thread/ThreadList.vue'
 import { useStore } from 'vuex';
 import firebase from "firebase/compat/app";
-import { onMounted } from '@vue/runtime-core';
 
 export default {
   props: {
@@ -35,11 +34,7 @@ export default {
     let forum = store.getters.getForumById(props.id);
     let user = store.getters.authUser;
     let threadTitle = ref('')
-    let threadsByForum = reactive([])
-
-    store.watch((_, getters) => {
-      Object.assign(forum, getters.getForumById(props.id))
-    })
+    let threadsByForum = store.getters.getThreadsByForum(props.id)
 
     let postThtread = () => {
       let forumsRef = firebase.firestore().collection("/forums");
@@ -60,20 +55,6 @@ export default {
         })
       })
     }
-
-    onMounted(async () => {
-      let threadsRef = firebase.firestore().collection("/threads");
-
-      await threadsRef.onSnapshot((snapshot) => {
-        snapshot.forEach((doc) => {
-          threadsByForum.push({
-            uid: doc.id,
-            ...doc.data(),
-          });
-        });
-      });
-
-    })
 
     return {
       forum,

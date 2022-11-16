@@ -20,7 +20,8 @@ export default {
       'fetchCategories',
       'fetchForums',
       'fetchPosts',
-      'fetchUsers'
+      'fetchUsers',
+      'fetchThreads'
     ]
 
     onMounted(() => {

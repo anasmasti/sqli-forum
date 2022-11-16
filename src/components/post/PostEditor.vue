@@ -5,7 +5,7 @@
                 <textarea v-model="newPost" rows="10" class="form-input"></textarea>
             </div>
             <div class="form-actions">
-                <button class="btn-blue">Submit Post</button>
+                <button class="btn-blue">Add Post</button>
             </div>
         </form>
     </div>

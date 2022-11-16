@@ -50,6 +50,22 @@ export default {
     });
   },
 
+   // Fetch Threads from firebase
+   async fetchThreads(context) {
+    let threadsRef = firebase.firestore().collection("/threads");
+    let threads = [];
+
+    await threadsRef.onSnapshot((snapshot) => {
+      snapshot.forEach((doc) => {
+        threads.push({
+          uid: doc.id,
+          ...doc.data(),
+        });
+      });
+      context.commit("fetchThreadsSuccess", threads);
+    });
+  },
+
   // Fetch Users from firebase
   async fetchUsers(context) {
     let usersRef = firebase.firestore().collection("/users");
