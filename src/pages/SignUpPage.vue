@@ -3,7 +3,7 @@
 		<h1 class="text-3xl font-black">Create an Account</h1>
 		<form @submit.prevent="signUp" class="flex flex-col p-5 gap-2">
 			<AppInput v-for="signUpInput in signUpInputs" :placeholder="signUpInput.placeholder"
-				:type="signUpInput.type" :key="signUpInput.placeholder" :isSended="isSended"
+				:type="signUpInput.type" :key="signUpInput.placeholder" :isSent="isSent"
 				@input-value="signUpInput.inputValueHandler" />
 			<AppButton text="Create" />
 		</form>
@@ -24,7 +24,7 @@ export default {
 		const name = ref('')
 		const router = useRouter()
 		const store = useStore()
-		let isSended = ref(false)
+		let isSent = ref(false)
 
 		let handleNameInputValue = (value) => {
 			name.value = value
@@ -69,20 +69,33 @@ export default {
 					let user = {
 						name: name.value,
 						email: userData.user._delegate.email,
-						uid: userData.user._delegate.uid,
+						userId: userData.user._delegate.uid,
 						createdAt: Math.floor(Date.now() / 1000)
 					}
 
-					// Put user info to cookies
-					document.cookie = `isLoggedIn= ${true}`
-					document.cookie = `user= ${JSON.stringify(user)}}`
 
-					// Put user info to yhe store
-					store.dispatch('toggleLoggedIn', { isLoggedIn: true })
-					store.dispatch('addAuthUser', { user: user })
 
 					// Add user to firestore
-					await usersRef.add(user)
+					await usersRef.add(user).then(data => {
+						data.get().then(userData => {
+							let authUser = {
+								uid: userData.id,
+								name: userData.data().name,
+								email: userData.data().email,
+								userId: userData.data().userId,
+								createdAt: userData.data().createdAt,
+							}
+
+							// Put user info to cookies
+							document.cookie = `isLoggedIn= ${true}`
+							document.cookie = `user= ${JSON.stringify(authUser)}}`
+
+							// Put user info to yhe store
+							store.dispatch('toggleLoggedIn', { isLoggedIn: true })
+							store.dispatch('addAuthUser', { user: authUser })
+						})
+
+					})
 
 					// Redirect to home page
 					router.push('/')
@@ -97,7 +110,7 @@ export default {
 			name,
 			signUp,
 			signUpInputs,
-			isSended
+			isSent
 		}
 	}
 }

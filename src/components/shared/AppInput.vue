@@ -9,7 +9,7 @@ import { ref, watchEffect } from 'vue'
 
 export default {
     props: {
-        isSended: Boolean
+        isSent: Boolean
     },
     setup(props, context) {
         let inputValue = ref('')
@@ -20,8 +20,8 @@ export default {
         }
 
         // Observe props to empty inputs after sending data
-        watchEffect((props.isSended, () => {
-            if (props.isSended) {
+        watchEffect((props.isSent, () => {
+            if (props.isSent) {
                 inputValue.value = ""
             }
         }))

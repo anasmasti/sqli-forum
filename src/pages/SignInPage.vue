@@ -3,7 +3,7 @@
 		<h1 class="text-3xl font-black">Login to Your Account</h1>
 		<form @submit.prevent="signIn" class="flex flex-col p-5 gap-2">
 			<AppInput v-for="signInInput in signInInputs" :placeholder="signInInput.placeholder"
-				:type="signInInput.type" :key="signInInput.placeholder" :isSended="isSended"
+				:type="signInInput.type" :key="signInInput.placeholder" :isSent="isSent"
 				@input-value="signInInput.inputValueHandler" />
 			<AppButton text="Login" />
 		</form>
@@ -23,7 +23,7 @@ export default {
 		let email = ref('')
 		let password = ref('')
 		let errMsg = ref('')
-		let isSended = ref(false)
+		let isSent = ref(false)
 		let router = useRouter()
 		let store = useStore()
 
@@ -58,7 +58,7 @@ export default {
 				.signInWithEmailAndPassword(email.value, password.value)
 				.then(async (userData) => {
 					await usersRef
-						.where("uid", "==", userData.user._delegate.uid)
+						.where("userId", "==", userData.user._delegate.uid)
 						.get()
 						.then((querySnapshot) => {
 							querySnapshot.forEach((doc) => {
@@ -95,7 +95,7 @@ export default {
 			signInInputs,
 			handleEmailInputValue,
 			handlePasswordInputValue,
-			isSended
+			isSent
 		}
 	}
 }

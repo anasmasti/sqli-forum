@@ -6,7 +6,7 @@
     </div>
 
     <form @submit.prevent="postThtread" class="flex gap-2 my-5">
-      <AppInput placeholder="Thread" :isSended="isSended" @input-value="handleInputValue"/>
+      <AppInput placeholder="Thread" :isSent="isSent" @input-value="handleInputValue"/>
       <!-- <input type="text" class="border border-gray-500 bg-gray-50 p-1 rounded-lg" v-model="threadTitle"> -->
       <AppButton text="Add new thread" />
     </form>
@@ -32,7 +32,7 @@ export default {
     let user = store.getters.authUser;
     let threadTitle = ref('')
     let threadsByForum = store.getters.getThreadsByForum(props.id)
-    let isSended = ref(false)
+    let isSent = ref(false)
 
     let handleInputValue = (value) => {
       threadTitle.value = value
@@ -57,10 +57,10 @@ export default {
         })
       })
 
-      isSended.value = true
+      isSent.value = true
 
 			setTimeout(() => {
-				isSended.value = false
+				isSent.value = false
 			}, 100);
     }
 
@@ -72,7 +72,7 @@ export default {
       postThtread,
       threadsByForum,
       handleInputValue,
-      isSended
+      isSent
     }
   }
 }
