@@ -15,7 +15,6 @@ import { ref } from 'vue'
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 import { useRouter } from 'vue-router'
-import { useStore } from 'vuex';
 
 export default {
 	setup() {
@@ -23,7 +22,6 @@ export default {
 		const password = ref('')
 		const name = ref('')
 		const router = useRouter()
-		const store = useStore()
 		let isSent = ref(false)
 
 		let handleNameInputValue = (value) => {
@@ -73,32 +71,11 @@ export default {
 						createdAt: Math.floor(Date.now() / 1000)
 					}
 
-
-
 					// Add user to firestore
-					await usersRef.add(user).then(data => {
-						data.get().then(userData => {
-							let authUser = {
-								uid: userData.id,
-								name: userData.data().name,
-								email: userData.data().email,
-								userId: userData.data().userId,
-								createdAt: userData.data().createdAt,
-							}
-
-							// Put user info to cookies
-							document.cookie = `isLoggedIn= ${true}`
-							document.cookie = `user= ${JSON.stringify(authUser)}}`
-
-							// Put user info to yhe store
-							store.dispatch('toggleLoggedIn', { isLoggedIn: true })
-							store.dispatch('addAuthUser', { user: authUser })
-						})
-
-					})
+					await usersRef.add(user)
 
 					// Redirect to home page
-					router.push('/')
+					router.push('/sign-in')
 				}).catch(error => {
 					console.log(error.message);
 				});

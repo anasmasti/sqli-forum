@@ -42,11 +42,14 @@ export default {
 
             isSent.value = true
 
-            await usersRef.doc("uid", "==", user.uid).update({
+            await usersRef.doc(user.uid).update({
                 name: name.value
             })
 
             user.name = name.value
+
+            store.commit('setAuthUser', { user: user })
+            document.cookie = `user= ${JSON.stringify(user)}`
 
             setTimeout(() => {
                 isSent.value = false

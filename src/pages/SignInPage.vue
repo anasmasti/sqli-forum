@@ -62,10 +62,17 @@ export default {
 						.get()
 						.then((querySnapshot) => {
 							querySnapshot.forEach((doc) => {
+								let userToInject = {
+									name: doc.data().name,
+									email: doc.data().email,
+									userId: doc.data().userId,
+									createdAt: doc.data().createdAt,
+									uid: doc.id,
+								}
 								document.cookie = `isLoggedIn= ${true}`
-								document.cookie = `user= ${JSON.stringify(doc.data())}`
+								document.cookie = `user= ${JSON.stringify(userToInject)}`
 								store.dispatch('toggleLoggedIn', { isLoggedIn: true })
-								store.dispatch('addAuthUser', { user: doc.data() })
+								store.dispatch('addAuthUser', { user: userToInject })
 								router.push('/')
 							});
 						})
