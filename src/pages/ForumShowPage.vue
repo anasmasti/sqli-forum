@@ -1,13 +1,14 @@
 <template>
-  <section class="p-8">
+  <section>
     <div>
       <h1 v-text="forum.name" class="text-3xl font-black"></h1>
       <p v-text="forum.description" class="text-xl"></p>
     </div>
 
     <form @submit.prevent="postThtread" class="flex gap-2 my-5">
-      <input type="text" class="border border-gray-500 bg-gray-50 p-1 rounded-lg" v-model="threadTitle">
-      <AppButton text="Add Post" />
+      <AppInput placeholder="Thread" :isSended="isSended" @input-value="handleInputValue"/>
+      <!-- <input type="text" class="border border-gray-500 bg-gray-50 p-1 rounded-lg" v-model="threadTitle"> -->
+      <AppButton text="Add new thread" />
     </form>
 
     <ThreadList :threads="threadsByForum" />
@@ -31,6 +32,11 @@ export default {
     let user = store.getters.authUser;
     let threadTitle = ref('')
     let threadsByForum = store.getters.getThreadsByForum(props.id)
+    let isSended = ref(false)
+
+    let handleInputValue = (value) => {
+      threadTitle.value = value
+    }
 
     let postThtread = () => {
       let forumsRef = firebase.firestore().collection("/forums");
@@ -50,13 +56,23 @@ export default {
           threads: [sendedThread.uid]
         })
       })
+
+      isSended.value = true
+
+			setTimeout(() => {
+				isSended.value = false
+			}, 100);
     }
+
+
 
     return {
       forum,
       threadTitle,
       postThtread,
-      threadsByForum
+      threadsByForum,
+      handleInputValue,
+      isSended
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-        <div class="p-8" >
+        <div class="mt-10">
             <h2 class="text-3xl font-black">
                 <router-link :to="{
                     name: 'Category',

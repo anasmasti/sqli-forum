@@ -1,21 +1,12 @@
 <template>
-    <div class="container">
-        <div class="flex-grid">
-            <UserProfileCard :user="user" />
-            <p class="text-small text-faded text-center">Member since june</p>
-            <div class="tect-center">
-                <hr>
-                <a href="" class="btn-green btn-small">Edit profile</a>
-            </div>
-            <div class="col-7 push-top">
-                <div class="profile-header">
-                    <span class="text-lead">{{ user.email }} recent activity</span>
-                    <a href="">See only threads</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div>
+        <div class="flex justify-end ">
+            <AppButton text="Edit profile" />
 
+        </div>
+        <UserProfileCard :user="user" />
+
+    </div>
 </template>
 
 <script>

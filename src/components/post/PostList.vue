@@ -4,13 +4,17 @@
             <p v-text="post.text" class="capitalize text-lg font-black"></p>
             <AppTimeStamps :timestamps="post.publishedAt" />
         </div>
-        <div class="flex flex-col-reverse">
-            <span class="text-sm">
-                {{ userById(thread.userId)?.name ? userById(thread.userId)?.name : '--' }}
-            </span>
-            <a href="#">
-                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="w-7" alt="user avatar" />
-            </a>
+        <div>
+            <img class="w-7" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user avatar" />
+            <div>
+                <p class="text-sm">
+                    By
+                    <span class="text-blue-500 capitalize">
+                        {{ userById(post?.userId)?.name ? userById(post?.userId)?.name : '--' }}
+                    </span>
+                </p>
+                <AppTimeStamps :timestamps='post.publishedAt' />
+            </div>
         </div>
     </div>
 </template>

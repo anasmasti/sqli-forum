@@ -1,13 +1,10 @@
 <template>
-	<div class="h-full flex flex-col items-center justify-center p-9">
+	<div class="h-full flex flex-col items-center justify-center">
 		<h1 class="text-3xl font-black">Create an Account</h1>
 		<form @submit.prevent="signUp" class="flex flex-col p-5 gap-2">
-			<input class="p-2 bg-gray-50 rounded-lg border border-gray-200" type="text" placeholder="Name"
-				v-model="name" />
-			<input class="p-2 bg-gray-50 rounded-lg border border-gray-200" type="text" placeholder="Email"
-				v-model="email" />
-			<input class="p-2 bg-gray-50 rounded-lg border border-gray-200" type="password" placeholder="Password"
-				v-model="password" />
+			<AppInput v-for="signUpInput in signUpInputs" :placeholder="signUpInput.placeholder"
+				:type="signUpInput.type" :key="signUpInput.placeholder" :isSended="isSended"
+				@input-value="signUpInput.inputValueHandler" />
 			<AppButton text="Create" />
 		</form>
 	</div>
@@ -27,6 +24,38 @@ export default {
 		const name = ref('')
 		const router = useRouter()
 		const store = useStore()
+		let isSended = ref(false)
+
+		let handleNameInputValue = (value) => {
+			name.value = value
+		}
+
+		let handleEmailInputValue = (value) => {
+			email.value = value
+		}
+
+		let handlePasswordInputValue = (value) => {
+			password.value = value
+		}
+
+		let signUpInputs = [
+			{
+				type: 'text',
+				placeholder: 'Full Name',
+				inputValueHandler: handleNameInputValue
+			},
+			{
+				type: 'text',
+				placeholder: 'Email',
+				inputValueHandler: handleEmailInputValue
+			},
+			{
+				type: 'password',
+				placeholder: 'Password',
+				inputValueHandler: handlePasswordInputValue
+			},
+
+		]
 
 		const signUp = async () => {
 			let usersRef = firebase.firestore().collection('users')
@@ -61,11 +90,14 @@ export default {
 					console.log(error.message);
 				});
 		}
+
 		return {
 			email,
 			password,
 			name,
-			signUp
+			signUp,
+			signUpInputs,
+			isSended
 		}
 	}
 }

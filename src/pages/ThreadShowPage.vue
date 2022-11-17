@@ -1,5 +1,5 @@
 <template>
-  <div class="p-8" v-if="thread">
+  <div v-if="thread">
     <h1 class="capitalize text-3xl mb-5 font-black text-blue-500" v-text="thread.title"></h1>
     <PostList :posts="threadPosts" />
     <PostEditor @save-post="savePost" />

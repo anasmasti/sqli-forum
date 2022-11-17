@@ -1,11 +1,10 @@
 <template>
-	<div class="h-full flex flex-col items-center justify-center p-9">
+	<div class="h-full flex flex-col items-center justify-center">
 		<h1 class="text-3xl font-black">Login to Your Account</h1>
 		<form @submit.prevent="signIn" class="flex flex-col p-5 gap-2">
-			<input class="p-2 bg-gray-50 rounded-lg border border-gray-200" type="text" placeholder="Email"
-				v-model="email" />
-			<input class="p-2 bg-gray-50 rounded-lg border border-gray-200" type="password" placeholder="Password"
-				v-model="password" />
+			<AppInput v-for="signInInput in signInInputs" :placeholder="signInInput.placeholder"
+				:type="signInInput.type" :key="signInInput.placeholder" :isSended="isSended"
+				@input-value="signInInput.inputValueHandler" />
 			<AppButton text="Login" />
 		</form>
 	</div>
@@ -18,15 +17,40 @@ import 'firebase/compat/auth'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex';
 
+
 export default {
 	setup() {
-		const email = ref('')
-		const password = ref('')
-		const errMsg = ref('')
-		const router = useRouter()
-		const store = useStore()
+		let email = ref('')
+		let password = ref('')
+		let errMsg = ref('')
+		let isSended = ref(false)
+		let router = useRouter()
+		let store = useStore()
 
-		const signIn = () => {
+
+		let handleEmailInputValue = (value) => {
+			email.value = value
+		}
+
+		let handlePasswordInputValue = (value) => {
+			password.value = value
+		}
+
+		let signInInputs = [
+			{
+				type: 'text',
+				placeholder: 'Email',
+				inputValueHandler: handleEmailInputValue
+			},
+			{
+				type: 'password',
+				placeholder: 'Password',
+				inputValueHandler: handlePasswordInputValue
+			},
+
+		]
+
+		let signIn = () => {
 			let usersRef = firebase.firestore().collection('/users')
 
 			firebase
@@ -67,7 +91,11 @@ export default {
 			signIn,
 			email,
 			password,
-			errMsg
+			errMsg,
+			signInInputs,
+			handleEmailInputValue,
+			handlePasswordInputValue,
+			isSended
 		}
 	}
 }
