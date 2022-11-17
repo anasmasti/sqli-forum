@@ -17,7 +17,7 @@
                 </p>
             </div>
             <div>
-                <img class="w-7" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user avatar" />
+                <AppUserAvatar />
                 <div>
                     <p class="text-sm">
                         By

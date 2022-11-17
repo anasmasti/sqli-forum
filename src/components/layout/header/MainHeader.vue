@@ -10,8 +10,9 @@
                         <router-link :to="{
                             name: 'profile'
                         }" class="flex items-center gap-2 mr-3 text-sm md:mr-0">
-                            <img class="w-9 h-9 rounded-full border border-solid border-white"
-                                src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user photo">
+                            <span class="border border-solid border-white rounded-full">
+                                <AppUserAvatar size="9" />
+                            </span>
                             <div>
                                 <p class="text-white capitalize font-bold flex items-start gap-1">
                                     <span>{{ user.name }} </span>
